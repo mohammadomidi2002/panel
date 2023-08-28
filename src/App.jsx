@@ -1,10 +1,9 @@
-import Login from "./features/identity/components/login"
 
 
 function App() {
 
   return (
-   <Login/>
+   <p>پنل ری اکت</p>
   )
 }
 
