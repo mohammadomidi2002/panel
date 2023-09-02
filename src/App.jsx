@@ -1,11 +1,11 @@
-import Login from "./features/identity/components/login"
+import { RouterProvider } from "react-router-dom"
+import router from "./router"
 
 
 function App() {
-
-  return (
-   <Login/>
-  )
+    return(
+<RouterProvider router={router}/>
+    )
 }
 
 export default App
