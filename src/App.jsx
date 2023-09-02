@@ -1,9 +1,11 @@
+import { RouterProvider } from "react-router-dom"
+import Router from "./router"
 
 
 function App() {
 
   return (
-   <p>پنل ری اکت</p>
+    <RouterProvider router={Router}/>
   )
 }
 
