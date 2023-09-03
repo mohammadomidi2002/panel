@@ -1,10 +1,14 @@
-import { createBrowserRouter } from "react-router-dom"
-import Login from "./features/identity/components/login"
-import Rejester from "./features/identity/components/rejester"
+import { createBrowserRouter } from "react-router-dom";
+import IdentityLayouts from "./layouts/identityLayouts";
+import Login from "./features/identity/components/login";
+import Register from "./features/identity/components/register";
 
 const router = createBrowserRouter([
-    { path: 'login', element: <Login/>},
-    { path: 'rejester', element: <Rejester/>}
-])
-    
-export default router
+    { element: <IdentityLayouts/>,
+children: [
+    { path: "login", element: <Login /> },
+    { path: "register", element: <Register /> }
+]}
+]);
+
+export default router;

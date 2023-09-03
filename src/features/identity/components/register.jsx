@@ -1,6 +1,6 @@
 // import React from 'react'
 
-const Rejester = () => {
+const Register = () => {
   return (
     <div>
      test 
@@ -8,4 +8,4 @@ const Rejester = () => {
   )
 }
 
-export default Rejester
+export default Register
