@@ -1,8 +1,13 @@
 // import React from 'react'
 import logo from "@assets/images/logo.svg";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
   return (
     <>
       <div className="text-center mt-4">
@@ -13,7 +18,9 @@ const Register = () => {
         </p>
         <p className="lead">
           قبلا ثبت نام نکرده اید؟
-          <Link to="/login" className="me-2">وارد شوید</Link>
+          <Link to="/login" className="me-2">
+            وارد شوید
+          </Link>
         </p>
       </div>
 
@@ -23,7 +30,11 @@ const Register = () => {
             <form>
               <div className="mb-3">
                 <label className="form-label">موبایل</label>
-                <input className="form-control form-control-lg" />
+                <input {...register('mobile', {
+                  required: 'موبایل الزامی است',
+                  minLength : 11,
+                  maxLength : 11
+                })} className={`form-control form-control-lg ${errors.mobile && "is-invalid"}`} />
               </div>
               <div className="mb-3">
                 <label className="form-label">رمز عبور</label>
@@ -49,7 +60,7 @@ const Register = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
