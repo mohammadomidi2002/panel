@@ -7,7 +7,12 @@ const Register = () => {
   const {
     register,
     formState: { errors },
+    handleSubmit
   } = useForm();
+
+  const submit = (data) => {
+    console.log(data)
+  }
   return (
     <>
       <div className="text-center mt-4">
@@ -27,7 +32,7 @@ const Register = () => {
       <div className="card">
         <div className="card-body">
           <div className="m-sm-4">
-            <form>
+            <form onSubmit={handleSubmit(submit)}>
               <div className="mb-3">
                 <label className="form-label">موبایل</label>
                 <input {...register('mobile', {
@@ -38,15 +43,21 @@ const Register = () => {
               </div>
               <div className="mb-3">
                 <label className="form-label">رمز عبور</label>
-                <input
-                  className="form-control form-control-lg mb-2"
+                <input {...register('password', {
+                  required: 'رمز عبور الزامی است',
+                  minLength: 4,
+                })}
+                  className={`form-control form-control-lg mb-2 ${errors.password && "is-invalid"}`}
                   type="password"
                 />
               </div>
               <div className="mb-3">
                 <label className="form-label">تکرار رمز عبور</label>
-                <input
-                  className="form-control form-control-lg mb-2"
+                <input {...register('confirmPassword', {
+                  required: 'تکرار رمز عبور الزامی است',
+                  minLength: 4,
+                })}
+                  className={`form-control form-control-lg mb-2 ${errors.confirmPassword && "is-invalid"}`}
                   type="password"
                 />
               </div>
