@@ -41,6 +41,9 @@ const Register = () => {
                   minLength : 11,
                   maxLength : 11
                 })} className={`form-control form-control-lg ${errors.mobile && "is-invalid"}`} />
+                { errors.mobile && errors.mobile.type === 'required' && (<p className="text-danger small fw-bolder mt-1">
+                  {errors.mobile?.message}
+                </p>)}
               </div>
               <div className="mb-3">
                 <label className="form-label">رمز عبور</label>
