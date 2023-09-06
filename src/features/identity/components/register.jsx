@@ -7,7 +7,8 @@ const Register = () => {
   const {
     register,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
+    watch
   } = useForm();
 
   const submit = (data) => {
@@ -55,7 +56,12 @@ const Register = () => {
                 <label className="form-label">تکرار رمز عبور</label>
                 <input {...register('confirmPassword', {
                   required: 'تکرار رمز عبور الزامی است',
-                  minLength: 4,
+                  validate: value => {
+                    if (watch('password') !== value) {
+                      return 'عدم تطابق با رمز عبور'
+                    }
+                  }
+
                 })}
                   className={`form-control form-control-lg mb-2 ${errors.confirmPassword && "is-invalid"}`}
                   type="password"
