@@ -103,7 +103,7 @@ const Register = () => {
               </div>
               <div className="text-center mt-3">
                 <button type="submit" className="btn btn-lg btn-primary">
-                  وارد شوید
+                  وارد شوید 
                 </button>
               </div>
             </form>
