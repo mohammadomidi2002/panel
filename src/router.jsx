@@ -6,7 +6,7 @@ import Register from "./features/identity/components/register";
 const router = createBrowserRouter([
     { element: <IdentityLayouts/>,
 children: [
-    { path: "login", element: <Login /> },
+    { path: "/", element: <Login /> },
     { path: "register", element: <Register /> }
 ]}
 ]);
