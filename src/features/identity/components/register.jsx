@@ -2,6 +2,7 @@
 import logo from "@assets/images/logo.svg";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { httpService } from "../../../assets/core/https-service";
 
 const Register = () => {
   const {
@@ -51,11 +52,13 @@ const Register = () => {
                     {errors.mobile?.message}
                   </p>
                 )}
-                {errors.mobile && ( errors.mobile.type === "maxLength" || errors.mobile.type === "minLength") && (
-                  <p className="text-danger small fw-bolder mt-1">
-                    موبایل باید 11 رقمی باشد
-                  </p>
-                )}
+                {errors.mobile &&
+                  (errors.mobile.type === "maxLength" ||
+                    errors.mobile.type === "minLength") && (
+                    <p className="text-danger small fw-bolder mt-1">
+                      موبایل باید 11 رقمی باشد
+                    </p>
+                  )}
               </div>
               <div className="mb-3">
                 <label className="form-label">رمز عبور</label>
@@ -90,20 +93,22 @@ const Register = () => {
                   }`}
                   type="password"
                 />
-                 {errors.confirmPassword && errors.confirmPassword.type === "required" && (
-                  <p className="text-danger small fw-bolder mt-1">
-                    {errors.confirmPassword?.message}
-                  </p>
-                )}
-                {errors.confirmPassword && errors.confirmPassword.type === "validate" && (
-                  <p className="text-danger small fw-bolder mt-1">
-                    {errors.confirmPassword?.message}
-                  </p>
-                )}
+                {errors.confirmPassword &&
+                  errors.confirmPassword.type === "required" && (
+                    <p className="text-danger small fw-bolder mt-1">
+                      {errors.confirmPassword?.message}
+                    </p>
+                  )}
+                {errors.confirmPassword &&
+                  errors.confirmPassword.type === "validate" && (
+                    <p className="text-danger small fw-bolder mt-1">
+                      {errors.confirmPassword?.message}
+                    </p>
+                  )}
               </div>
               <div className="text-center mt-3">
                 <button type="submit" className="btn btn-lg btn-primary">
-                  وارد شوید 
+                  وارد شوید
                 </button>
               </div>
             </form>
@@ -115,3 +120,10 @@ const Register = () => {
 };
 
 export default Register;
+
+export async function registerAction({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const response = await httpService.post("/Users", data);
+  return response.status === 200;
+}
