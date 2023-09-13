@@ -1,7 +1,7 @@
 // import React from 'react'
 import logo from "@assets/images/logo.svg";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useSubmit } from "react-router-dom";
 import { httpService } from "../../../assets/core/https-service";
 
 const Register = () => {
@@ -12,8 +12,11 @@ const Register = () => {
     watch,
   } = useForm();
 
+  const submitForm = useSubmit();
+
   const submit = (data) => {
-    console.log(data);
+    const {confirmPassword, ...userData} = data;
+    submitForm(userData, {method: 'post'})
   };
   return (
     <>
