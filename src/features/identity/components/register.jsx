@@ -1,7 +1,7 @@
 // import React from 'react'
 import logo from "@assets/images/logo.svg";
 import { useForm } from "react-hook-form";
-import { Link, useSubmit } from "react-router-dom";
+import { Link, useNavigation, useSubmit } from "react-router-dom";
 import { httpService } from "../../../assets/core/https-service";
 
 const Register = () => {
@@ -15,9 +15,12 @@ const Register = () => {
   const submitForm = useSubmit();
 
   const submit = (data) => {
-    const {confirmPassword, ...userData} = data;
-    submitForm(userData, {method: 'post'})
+    const { confirmPassword, ...userData } = data;
+    submitForm(userData, { method: "post" });
   };
+
+  const navigation = useNavigation();
+  const isSubmiting = navigation.state !== "idle";
   return (
     <>
       <div className="text-center mt-4">
