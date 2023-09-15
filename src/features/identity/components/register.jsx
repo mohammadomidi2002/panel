@@ -113,8 +113,8 @@ const Register = () => {
                   )}
               </div>
               <div className="text-center mt-3">
-                <button type="submit" className="btn btn-lg btn-primary">
-                  وارد شوید
+                <button disabled={isSubmiting} type="submit" className="btn btn-lg btn-primary">
+                  {isSubmiting ? 'در حال انجام عملیات' : 'ثبت نام کنید'}
                 </button>
               </div>
             </form>
