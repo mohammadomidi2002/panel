@@ -11,7 +11,9 @@ const Login = () => {
         </p>
         <p className="lead">
           قبلا ثبت نام نکرده اید؟
-          <Link to="/register" className="me-2">ثبت نام کنید </Link>
+          <Link to="/register" className="me-2">
+            ثبت نام کنید{" "}
+          </Link>
         </p>
       </div>
 
