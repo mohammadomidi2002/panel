@@ -1,7 +1,7 @@
 // import React from 'react'
 import logo from "@assets/images/logo.svg";
 import { useForm } from "react-hook-form";
-import { Link, useNavigation, useSubmit } from "react-router-dom";
+import { Link, useActionData, useNavigation, useSubmit } from "react-router-dom";
 import { httpService } from "../../../assets/core/https-service";
 
 const Register = () => {
@@ -21,6 +21,8 @@ const Register = () => {
 
   const navigation = useNavigation();
   const isSubmiting = navigation.state !== "idle";
+
+  const isSuccessOperation = useActionData();
   return (
     <>
       <div className="text-center mt-4">
@@ -121,6 +123,9 @@ const Register = () => {
                   {isSubmiting ? "در حال انجام عملیات" : "ثبت نام کنید"}
                 </button>
               </div>
+              { isSuccessOperation && <div className="alert alert-success text-success p-2 mt-3">
+                عملیات با موفقیت انجام شد. به صفحه ورود منتقل می شوید
+                </div>}
             </form>
           </div>
         </div>
