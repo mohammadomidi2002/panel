@@ -1,8 +1,16 @@
 // import React from 'react'
 import logo from "@assets/images/logo.svg";
 import { useForm } from "react-hook-form";
-import { Link, useActionData, useNavigation, useSubmit } from "react-router-dom";
+import {
+  Link,
+  useActionData,
+  useNavigate,
+  useNavigation,
+  useRouteError,
+  useSubmit,
+} from "react-router-dom";
 import { httpService } from "../../../assets/core/https-service";
+import { useEffect } from "react";
 
 const Register = () => {
   const {
@@ -23,6 +31,19 @@ const Register = () => {
   const isSubmiting = navigation.state !== "idle";
 
   const isSuccessOperation = useActionData();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccessOperation) {
+      setTimeout(() => {
+        navigate('/')
+      }, [2000])  
+    }
+  }, [isSuccessOperation]);
+
+  const routeError = useRouteError();
+
   return (
     <>
       <div className="text-center mt-4">
@@ -123,9 +144,16 @@ const Register = () => {
                   {isSubmiting ? "در حال انجام عملیات" : "ثبت نام کنید"}
                 </button>
               </div>
-              { isSuccessOperation && <div className="alert alert-success text-success p-2 mt-3">
-                عملیات با موفقیت انجام شد. به صفحه ورود منتقل می شوید
-                </div>}
+              {isSuccessOperation && (
+                <div className="alert alert-success text-success p-2 mt-3">
+                  عملیات با موفقیت انجام شد. به صفحه ورود منتقل می شوید
+                </div>
+              )}
+              {routeError && (
+                <div className="alert alert-danger text-danger p-2 mt-3">
+                  {routeError.response?.data.map((error, index) => <p className="mb-0" key={index}>{error.description}</p>)}
+                </div>
+              )}
             </form>
           </div>
         </div>

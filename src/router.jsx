@@ -8,7 +8,7 @@ const router = createBrowserRouter([
     element: <IdentityLayouts />,
     children: [
       { path: "/", element: <Login /> },
-      { path: "register", element: <Register />, action: registerAction },
+      { path: "register", element: <Register />, action: registerAction, errorElement: <Register/> },
     ],
   },
 ]);
