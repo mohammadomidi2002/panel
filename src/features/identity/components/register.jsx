@@ -38,7 +38,7 @@ const Register = () => {
     if (isSuccessOperation) {
       setTimeout(() => {
         navigate('/')
-      }, [2000])  
+      }, [2000])
     }
   }, [isSuccessOperation]);
 
@@ -72,9 +72,8 @@ const Register = () => {
                     minLength: 11,
                     maxLength: 11,
                   })}
-                  className={`form-control form-control-lg ${
-                    errors.mobile && "is-invalid"
-                  }`}
+                  className={`form-control form-control-lg ${errors.mobile && "is-invalid"
+                    }`}
                 />
                 {errors.mobile && errors.mobile.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
@@ -95,9 +94,8 @@ const Register = () => {
                   {...register("password", {
                     required: "رمز عبور الزامی است",
                   })}
-                  className={`form-control form-control-lg mb-2 ${
-                    errors.password && "is-invalid"
-                  }`}
+                  className={`form-control form-control-lg mb-2 ${errors.password && "is-invalid"
+                    }`}
                   type="password"
                 />
                 {errors.password && errors.password.type === "required" && (
@@ -117,9 +115,8 @@ const Register = () => {
                       }
                     },
                   })}
-                  className={`form-control form-control-lg mb-2 ${
-                    errors.confirmPassword && "is-invalid"
-                  }`}
+                  className={`form-control form-control-lg mb-2 ${errors.confirmPassword && "is-invalid"
+                    }`}
                   type="password"
                 />
                 {errors.confirmPassword &&
