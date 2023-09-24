@@ -9,7 +9,7 @@ import {
   useRouteError,
   useSubmit,
 } from "react-router-dom";
-import { httpService } from "../../../assets/core/https-service";
+import { httpService } from "../../../core/https-service";
 import { useEffect } from "react";
 
 const Register = () => {
@@ -54,7 +54,7 @@ const Register = () => {
         </p>
         <p className="lead">
           قبلا ثبت نام نکرده اید؟
-          <Link to="/" className="me-2">
+          <Link to="/login" className="me-2">
             وارد شوید
           </Link>
         </p>
