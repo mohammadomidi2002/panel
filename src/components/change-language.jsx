@@ -1,14 +1,31 @@
-import { usFlag } from "@assets/images/us.png";
-import { faFlag } from "@assets/images/fa.png";
-import { useState } from 'react'
+import  usFlag  from "@assets/images/us.png";
+import  faFlag  from "@assets/images/fa.png";
+import { useEffect, useRef, useState } from 'react'
 
 
 const ChangeLanguage = () => {
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const ref = useRef();
+
+  useEffect(()=> {
+
+    const checkIfClickOutSide = e => {
+      if(show && ref.current && !ref.current.contains(e.target)) {
+        setShow(false)
+      }
+    }
+
+      document.addEventListener('mousedown', checkIfClickOutSide);
+
+      return () => {
+        document.addEventListener('mousedown', checkIfClickOutSide);
+      }
+  },[show])
+
   return (
     
-    <div className='dropdown' style={{ backgroundColor: "red" }}>
+    <div className='dropdown'>
       <a className='nav-flag dropdown-toggle' onClick={() => setShow(true)}>
         <img src={usFlag} alt="English" />
       </a>
