@@ -19,7 +19,7 @@ const ChangeLanguage = () => {
       document.addEventListener('mousedown', checkIfClickOutSide);
 
       return () => {
-        document.addEventListener('mousedown', checkIfClickOutSide);
+        document.removeEventListener('mousedown', checkIfClickOutSide);
       }
   },[show])
 
