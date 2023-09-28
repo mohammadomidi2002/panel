@@ -1,10 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import ChangeLanguage from "../components/change-language";
 
 const IdentityLayouts = () => {
   return (
     <>
       <div className="main d-flex justify-content-center w-100">
+        <ChangeLanguage/>
         <main className="content d-flex p-0">
           <div className="container d-flex flex-column">
             <div className="row h-100">
