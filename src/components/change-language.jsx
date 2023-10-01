@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const ChangeLanguage = () => {
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
   const ref = useRef();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const ChangeLanguage = () => {
       <a className='nav-flag dropdown-toggle' onClick={() => setShow(true)}>
         <img src={usFlag} alt="English" />
       </a>
-      <div className={`dropdown-menu dropdown-menu-end show ${show ? 'show' : undefined}`}>
+      <div ref={ref} className={`dropdown-menu dropdown-menu-end ${show ? 'show' : undefined}`}>
         <a className="dropdown-item fw-bolder" style={{ textAlign: "right" }}>
           <img src={faFlag} width="20" className="ms-2" />
           <span className="align-middle">فارسی</span>
