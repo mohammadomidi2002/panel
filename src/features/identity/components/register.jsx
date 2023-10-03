@@ -37,8 +37,8 @@ const Register = () => {
   useEffect(() => {
     if (isSuccessOperation) {
       setTimeout(() => {
-        navigate('/')
-      }, [2000])
+        navigate("/");
+      }, [2000]);
     }
   }, [isSuccessOperation]);
 
@@ -72,8 +72,9 @@ const Register = () => {
                     minLength: 11,
                     maxLength: 11,
                   })}
-                  className={`form-control form-control-lg ${errors.mobile && "is-invalid"
-                    }`}
+                  className={`form-control form-control-lg ${
+                    errors.mobile && "is-invalid"
+                  }`}
                 />
                 {errors.mobile && errors.mobile.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
@@ -94,8 +95,9 @@ const Register = () => {
                   {...register("password", {
                     required: "رمز عبور الزامی است",
                   })}
-                  className={`form-control form-control-lg mb-2 ${errors.password && "is-invalid"
-                    }`}
+                  className={`form-control form-control-lg mb-2 ${
+                    errors.password && "is-invalid"
+                  }`}
                   type="password"
                 />
                 {errors.password && errors.password.type === "required" && (
@@ -115,8 +117,9 @@ const Register = () => {
                       }
                     },
                   })}
-                  className={`form-control form-control-lg mb-2 ${errors.confirmPassword && "is-invalid"
-                    }`}
+                  className={`form-control form-control-lg mb-2 ${
+                    errors.confirmPassword && "is-invalid"
+                  }`}
                   type="password"
                 />
                 {errors.confirmPassword &&
@@ -148,7 +151,11 @@ const Register = () => {
               )}
               {routeError && (
                 <div className="alert alert-danger text-danger p-2 mt-3">
-                  {routeError.response?.data.map((error, index) => <p className="mb-0" key={index}>{error.description}</p>)}
+                  {routeError.response?.data.map((error, index) => (
+                    <p className="mb-0" key={index}>
+                      {error.description}
+                    </p>
+                  ))}
                 </div>
               )}
             </form>
