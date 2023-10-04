@@ -1,12 +1,15 @@
 import usFlag from "@assets/images/us.png";
 import faFlag from "@assets/images/fa.png";
 import { useEffect, useRef, useState } from 'react'
+import { useAppContext } from "../context/app/app-context";
 
 
 const ChangeLanguage = () => {
 
   const [show, setShow] = useState(false)
   const ref = useRef();
+
+  const {language, changeLanguage} = useAppContext();
 
   useEffect(() => {
 
@@ -27,14 +30,14 @@ const ChangeLanguage = () => {
 
     <div className='dropdown'>
       <a className='nav-flag dropdown-toggle' onClick={() => setShow(true)}>
-        <img src={usFlag} alt="English" />
+        <img src={language === 'fa' ? faFlag : usFlag} alt="English" />
       </a>
       <div ref={ref} className={`dropdown-menu dropdown-menu-end ${show ? 'show' : undefined}`}>
-        <a className="dropdown-item fw-bolder" style={{ textAlign: "right" }}>
+        <a className="dropdown-item fw-bolder" style={{ textAlign: "right" }} onClick={() => changeLanguage('fa')}>
           <img src={faFlag} width="20" className="ms-2" />
           <span className="align-middle">فارسی</span>
         </a>
-        <a className="dropdown-item fw-bolder" style={{ textAlign: "right" }}>
+        <a className="dropdown-item fw-bolder" style={{ textAlign: "right" }} onClick={() => changeLanguage('en')}>
           <img src={usFlag} width="20" className="ms-2" />
           <span className="align-middle">English</span>
         </a>
