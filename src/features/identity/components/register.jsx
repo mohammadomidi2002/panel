@@ -50,14 +50,14 @@ const Register = () => {
     <>
       <div className="text-center mt-4">
         <img src={logo} style={{ height: "100px" }} />
-        <h1 className="h2">پلتفرم آموزش آنلاین</h1>
+        <h1 className="h2">{t('register.title')}</h1>
         <p className="lead">
-          جهت ورود لازم است از طریق موبایل و رمز عبور خود اقدام کنید
+         {t('register.introMessage')}
         </p>
         <p className="lead">
-          قبلا ثبت نام نکرده اید؟
+          {t('register.alreadyRegistered')}
           <Link to="/" className="me-2">
-            وارد شوید
+            {t('register.signin')}
           </Link>
         </p>
       </div>
@@ -67,10 +67,10 @@ const Register = () => {
           <div className="m-sm-4">
             <form onSubmit={handleSubmit(submit)}>
               <div className="mb-3">
-                <label className="form-label">موبایل</label>
+                <label className="form-label">{t('register.mobile')}</label>
                 <input
                   {...register("mobile", {
-                    required: "موبایل الزامی است",
+                    required: true,
                     minLength: 11,
                     maxLength: 11,
                   })}
@@ -80,22 +80,22 @@ const Register = () => {
                 />
                 {errors.mobile && errors.mobile.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
-                    {errors.mobile?.message}
+                     {t("register.validation.mobileRequired")}
                   </p>
                 )}
                 {errors.mobile &&
                   (errors.mobile.type === "maxLength" ||
                     errors.mobile.type === "minLength") && (
                     <p className="text-danger small fw-bolder mt-1">
-                      موبایل باید 11 رقمی باشد
+                     {t('register.validation.mobileLength')}
                     </p>
                   )}
               </div>
               <div className="mb-3">
-                <label className="form-label">رمز عبور</label>
+                <label className="form-label">{t('register.password')}</label>
                 <input
                   {...register("password", {
-                    required: "رمز عبور الزامی است",
+                    required: true,
                   })}
                   className={`form-control form-control-lg mb-2 ${
                     errors.password && "is-invalid"
@@ -104,18 +104,18 @@ const Register = () => {
                 />
                 {errors.password && errors.password.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
-                    {errors.password?.message}
+                    {t('register.validation.passwordRequired')}
                   </p>
                 )}
               </div>
               <div className="mb-3">
-                <label className="form-label">تکرار رمز عبور</label>
+                <label className="form-label">{t('register.repeatPassword')}</label>
                 <input
                   {...register("confirmPassword", {
-                    required: "تکرار رمز عبور الزامی است",
+                    required: t('register.validation.repeatPasswordRequired'),
                     validate: (value) => {
                       if (watch("password") !== value) {
-                        return "عدم تطابق با رمز عبور";
+                        return t('register.validation.notMatching');
                       }
                     },
                   })}
@@ -143,13 +143,13 @@ const Register = () => {
                   type="submit"
                   className="btn btn-lg btn-primary"
                 >
-                  {t('register.register')}
+                  {isSubmiting ? t('register.saving') : t('register.register') }
                   {/* {isSubmiting ? "در حال انجام عملیات" : "ثبت نام کنید"} */}
                 </button>
               </div>
               {isSuccessOperation && (
                 <div className="alert alert-success text-success p-2 mt-3">
-                  عملیات با موفقیت انجام شد. به صفحه ورود منتقل می شوید
+                  {t('register.successOperation')}
                 </div>
               )}
               {routeError && (
