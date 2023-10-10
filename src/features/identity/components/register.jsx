@@ -22,7 +22,7 @@ const Register = () => {
   } = useForm();
 
   const submitForm = useSubmit();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const submit = (data) => {
     const { confirmPassword, ...userData } = data;
@@ -52,7 +52,7 @@ const Register = () => {
         <img src={logo} style={{ height: "100px" }} />
         <h1 className="h2">{t('register.title')}</h1>
         <p className="lead">
-         {t('register.introMessage')}
+          {t('register.introMessage')}
         </p>
         <p className="lead">
           {t('register.alreadyRegistered')}
@@ -80,14 +80,14 @@ const Register = () => {
                 />
                 {errors.mobile && errors.mobile.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
-                     {t("register.validation.mobileRequired")}
+                    {t("register.validation.mobileRequired")}
                   </p>
                 )}
                 {errors.mobile &&
                   (errors.mobile.type === "maxLength" ||
                     errors.mobile.type === "minLength") && (
                     <p className="text-danger small fw-bolder mt-1">
-                     {t('register.validation.mobileLength')}
+                      {t('register.validation.mobileLength')}
                     </p>
                   )}
               </div>
@@ -143,7 +143,7 @@ const Register = () => {
                   type="submit"
                   className="btn btn-lg btn-primary"
                 >
-                  {isSubmiting ? t('register.saving') : t('register.register') }
+                  {isSubmiting ? t('register.saving') : t('register.register')}
                   {/* {isSubmiting ? "در حال انجام عملیات" : "ثبت نام کنید"} */}
                 </button>
               </div>

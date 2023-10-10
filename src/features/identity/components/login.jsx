@@ -3,19 +3,19 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 const Login = () => {
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <>
       <div className="text-center mt-4">
         <img src={logo} style={{ height: "100px" }} />
-        <h1 className="h2">{}
-        
+        <h1 className="h2">{ }
+
         </h1>
         <p className="lead">
           {t('login.introMessage')}
         </p>
         <p className="lead">
-         {t('login.areNotRegistered')}
+          {t('login.areNotRegistered')}
           <Link to="/register" className="me-2">
             {t('login.register')}
           </Link>
@@ -39,7 +39,7 @@ const Login = () => {
               </div>
               <div className="text-center mt-3">
                 <button type="submit" className="btn btn-lg btn-primary">
-                 {t('login.signin')}
+                  {t('login.signin')}
                 </button>
               </div>
             </form>
