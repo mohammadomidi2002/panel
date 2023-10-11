@@ -7,12 +7,12 @@ const initialState = {
     language: localStorage.getItem('language') || 'fa'
 };
 
-const AppProvider = ({children}) => {
+const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(appReducer, initialState);
-    const {i18n} = useTranslation();
+    const { i18n } = useTranslation();
 
     const changeLanguage = (language) => {
-        dispatch({type: 'CHANGE_LANGUAGE', payload: language})
+        dispatch({ type: 'CHANGE_LANGUAGE', payload: language })
     }
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const AppProvider = ({children}) => {
         document.body.dataset.direction = state.language === 'fa' ? 'rtl' : 'ltr'
     }, [state.language])
 
-    return <AppContext.Provider value={{...state, changeLanguage}}>
+    return <AppContext.Provider value={{ ...state, changeLanguage }}>
         {children}
     </AppContext.Provider>
 }
@@ -30,4 +30,4 @@ const useAppContext = () => {
     return useContext(AppContext);
 }
 
-export {useAppContext, AppProvider}
+export { useAppContext, AppProvider }
