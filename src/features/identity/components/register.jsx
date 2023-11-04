@@ -144,7 +144,6 @@ const Register = () => {
                   className="btn btn-lg btn-primary"
                 >
                   {isSubmiting ? t('register.saving') : t('register.register')}
-                  {/* {isSubmiting ? "در حال انجام عملیات" : "ثبت نام کنید"} */}
                 </button>
               </div>
               {isSuccessOperation && (
