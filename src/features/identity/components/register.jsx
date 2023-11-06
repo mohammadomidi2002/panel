@@ -9,7 +9,7 @@ import {
   useRouteError,
   useSubmit,
 } from "react-router-dom";
-import { httpService } from "../../../core/https-service";
+import { httpService } from "@core/https-service";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -44,7 +44,7 @@ const Register = () => {
     }
   }, [isSuccessOperation]);
 
-  const routeError = useRouteError();
+  const routeErrors = useRouteError();
 
   return (
     <>
@@ -74,9 +74,8 @@ const Register = () => {
                     minLength: 11,
                     maxLength: 11,
                   })}
-                  className={`form-control form-control-lg ${
-                    errors.mobile && "is-invalid"
-                  }`}
+                  className={`form-control form-control-lg ${errors.mobile && "is-invalid"
+                    }`}
                 />
                 {errors.mobile && errors.mobile.type === "required" && (
                   <p className="text-danger small fw-bolder mt-1">
@@ -97,9 +96,8 @@ const Register = () => {
                   {...register("password", {
                     required: true,
                   })}
-                  className={`form-control form-control-lg mb-2 ${
-                    errors.password && "is-invalid"
-                  }`}
+                  className={`form-control form-control-lg mb-2 ${errors.password && "is-invalid"
+                    }`}
                   type="password"
                 />
                 {errors.password && errors.password.type === "required" && (
@@ -119,9 +117,8 @@ const Register = () => {
                       }
                     },
                   })}
-                  className={`form-control form-control-lg mb-2 ${
-                    errors.confirmPassword && "is-invalid"
-                  }`}
+                  className={`form-control form-control-lg mb-2 ${errors.confirmPassword && "is-invalid"
+                    }`}
                   type="password"
                 />
                 {errors.confirmPassword &&
@@ -151,11 +148,11 @@ const Register = () => {
                   {t('register.successOperation')}
                 </div>
               )}
-              {routeError && (
+              {routeErrors && (
                 <div className="alert alert-danger text-danger p-2 mt-3">
-                  {routeError.response?.data.map((error, index) => (
+                  {routeErrors.response?.data.map((error, index) => (
                     <p className="mb-0" key={index}>
-                      {error.description}
+                      {t(`login.validation.${error.code}`)}
                     </p>
                   ))}
                 </div>
