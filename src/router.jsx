@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   {
     element: <IdentityLayouts />,
     children: [
-      { path: "/", element: <Login />, action: loginAction, errorElement: <Login /> },
+      { path: "login", element: <Login />, action: loginAction, errorElement: <Login /> },
       { path: "register", element: <Register />, action: registerAction, errorElement: <Register /> },
     ],
   },

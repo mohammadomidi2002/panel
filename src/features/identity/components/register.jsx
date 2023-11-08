@@ -56,7 +56,7 @@ const Register = () => {
         </p>
         <p className="lead">
           {t('register.alreadyRegistered')}
-          <Link to="/" className="me-2">
+          <Link to="/login" className="me-2">
             {t('register.signin')}
           </Link>
         </p>
