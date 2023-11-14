@@ -1,4 +1,5 @@
 import { httpInterceptedService } from "@core/https-service"
+import CourseList from "../features/courses/components/course-list";
 
 const Courses = () => {
   return (
@@ -9,6 +10,7 @@ const Courses = () => {
             افزودن دوره جدید
           </a>
         </div>
+        <CourseList/>
       </div>
     </div>
   )
@@ -16,7 +18,7 @@ const Courses = () => {
 
 export async function coursesLoder() {
   const response = await httpInterceptedService.get('/Course/list');
-  return (response.data)
+  return response.data
 }
 
 export default Courses
