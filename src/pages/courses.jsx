@@ -1,7 +1,10 @@
 import { httpInterceptedService } from "@core/https-service"
 import CourseList from "../features/courses/components/course-list";
+import { Await, defer, useLoaderData } from "react-router-dom";
+import { Suspense } from "react";
 
 const Courses = () => {
+  const data = useLoaderData();
   return (
     <div className="row">
       <div className="col-12">
@@ -10,13 +13,26 @@ const Courses = () => {
             افزودن دوره جدید
           </a>
         </div>
-        <CourseList/>
+        <Suspense fallback={<p className="text-info">در حال دریافت اطلاعات...</p>}>
+          <Await resolve={data.courses}>
+            {
+              (loadedCourses) => <CourseList courses={loadedCourses}/>
+            }
+          </Await>
+        </Suspense>
       </div>
     </div>
   )
 }
 
 export async function coursesLoder() {
+  return defer({
+    courses: loadCourses()
+  })
+
+}
+
+const loadCourses = async () => {
   const response = await httpInterceptedService.get('/Course/list');
   return response.data
 }
