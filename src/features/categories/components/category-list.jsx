@@ -2,7 +2,7 @@ import { useNavigation } from "react-router-dom"
 import Pagination from "../../../components/pagination"
 import Spinner from "../../../components/spinner";
 
-const CategoryList = ({ categories: { data, totalRecords }, setShowDeleteModal }) => {
+const CategoryList = ({ categories: { data, totalRecords }, deleteCategory }) => {
 
   const navigation = useNavigation();
   return (
@@ -37,7 +37,7 @@ const CategoryList = ({ categories: { data, totalRecords }, setShowDeleteModal }
                       </svg>
                     </a>
                     <a onClick={() => {
-                      setShowDeleteModal(true)
+                      deleteCategory(category.id)
                     }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
