@@ -1,4 +1,4 @@
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useNavigate } from "react-router-dom";
 import { httpInterceptedService } from "@core/https-service";
 import { Suspense, useState } from "react";
 import CategoryList from "../features/categories/components/category-list";
@@ -7,12 +7,26 @@ import Modal from "../components/modal";
 const CourseCategories = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
+  const data = useLoaderData();
+  const navigate = useNavigate();
 
   const deleteCategory = categoryId => {
     setSelectedCategory(categoryId);
     setShowDeleteModal(true);
   }
-  const data = useLoaderData();
+
+  const handleDeleteCategory = async () => {
+    setShowDeleteModal(false);
+    const response = await httpInterceptedService.delete(`/CourseCategory/${selectedCategory}`);
+
+    if (response.status === 200) {
+      // After getting the status of 200, I have to make the page update (loader run again)
+      const url = new URL(window.location.href);
+      // window.location.href = the current address
+      navigate(url.pathname + url.search);
+      // pathname = domain & search = quary string
+    }
+  }
   return (
     <>
       <div className="row">
@@ -37,8 +51,8 @@ const CourseCategories = () => {
         }}>
           انصراف
         </button>
-        <button className="btn btn-primary fw-bolder">
-          ثبت
+        <button className="btn btn-primary fw-bolder" onClick={handleDeleteCategory}>
+          حذف
         </button>
       </Modal>
     </>
