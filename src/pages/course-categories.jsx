@@ -5,10 +5,13 @@ import CategoryList from "../features/categories/components/category-list";
 import Modal from "../components/modal";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import AddOrUpdateCategory from "../features/categories/components/add-or-update-category";
 
 const CourseCategories = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
+  const [showAddCategory, setShowAddCategory] = useState(false);
+
   const data = useLoaderData();
   const navigate = useNavigate();
   const {t} = useTranslation();
@@ -57,10 +60,11 @@ const CourseCategories = () => {
       <div className="row">
         <div className="col-12">
           <div className="d-flex align-items-center justify-content-between mb-5">
-            <a className="btn btn-primary fw-bolder mt-n1">
+            <a className="btn btn-primary fw-bolder mt-n1" onClick={() => {setShowAddCategory(true)}}>
               افزودن دسته جدید
             </a>
           </div>
+          {showAddCategory && <AddOrUpdateCategory setShowAddCategory={setShowAddCategory}/>}
           <Suspense fallback={<p className="text-info">در حال دریافت اطلاعات...</p>}>
             <Await resolve={data.categories}>
               {
