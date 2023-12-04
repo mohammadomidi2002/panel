@@ -3,12 +3,15 @@ import { httpInterceptedService } from "@core/https-service";
 import { Suspense, useState } from "react";
 import CategoryList from "../features/categories/components/category-list";
 import Modal from "../components/modal";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const CourseCategories = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
   const data = useLoaderData();
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   const deleteCategory = categoryId => {
     setSelectedCategory(categoryId);
@@ -17,15 +20,37 @@ const CourseCategories = () => {
 
   const handleDeleteCategory = async () => {
     setShowDeleteModal(false);
-    const response = await httpInterceptedService.delete(`/CourseCategory/${selectedCategory}`);
+    // If we cancel, it is no longer a promise
+    const response = httpInterceptedService.delete(`/CourseCategory/${selectedCategory}`);
 
-    if (response.status === 200) {
-      // After getting the status of 200, I have to make the page update (loader run again)
-      const url = new URL(window.location.href);
-      // window.location.href = the current address
-      navigate(url.pathname + url.search);
-      // pathname = domain & search = quary string
-    }
+    toast.promise(
+      // pass promise (response is promise)
+      response,
+      {
+        pending: "در حال حذف ...",
+        success: {
+          render() {
+            // After getting the status of 200, I have to make the page update (loader run again)
+            const url = new URL(window.location.href);
+            // window.location.href = the current address
+            navigate(url.pathname + url.search);
+            // pathname = domain & search = quary string
+            return 'عملیات با موفقیت انجام شد'
+          }
+        },
+        error: {
+          render({data}) {
+            return t('categoryList.' + data.response.data.code)
+          }
+        }
+      },
+      {
+        position: toast.POSITION.BOTTOM_LEFT,
+      }
+    )
+
+
+
   }
   return (
     <>
