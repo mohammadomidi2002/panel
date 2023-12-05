@@ -6,11 +6,15 @@ import MainLayout from "./layouts/mainLayout/main-layout";
 import Courses, { coursesLoder } from "./pages/courses";
 import CourseCategories, { categoriesLoader } from "./pages/course-categories";
 import { CategoryProvider } from "./features/categories/category-context";
+import NotFound from "./pages/not-found";
+import UnhandledException from "./pages/unhandled-exception";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    // We bind global errors at the highest level of the object
+    errorElement: <UnhandledException/>,
     children: [
       {
         element: <Courses />,
@@ -35,6 +39,10 @@ const router = createBrowserRouter([
       { path: "register", element: <Register />, action: registerAction, errorElement: <Register /> },
     ],
   },
+  {
+    path: '*',
+    element: <NotFound/>
+  }
 ]);
 
 export default router;
