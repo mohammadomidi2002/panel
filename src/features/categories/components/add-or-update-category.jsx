@@ -3,15 +3,31 @@ import { httpInterceptedService } from "@core/https-service";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCategoryContext } from "../category-context";
+import { useEffect } from "react";
 
 const AddOrUpdateCategory = ({ setShowAddCategory }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
+
+  const { category, setCategory } = useCategoryContext();
+
+  useEffect(() => {
+    if (category) {
+      setValue('name', category.name)
+      setValue('id', category.id)
+    }
+  }, [category]);
+
+  const onClose = () => {
+    setShowAddCategory(false);
+    setCategory(null)
+  }
 
   const onSubmit = (data) => {
     setShowAddCategory(false)
-    const response = httpInterceptedService.post(`/CourseCategory/`,data);
+    const response = httpInterceptedService.post(`/CourseCategory/`, data);
     toast.promise(
       // pass promise (response is promise)
       response,
@@ -24,12 +40,15 @@ const AddOrUpdateCategory = ({ setShowAddCategory }) => {
             // window.location.href = the current address
             navigate(url.pathname + url.search);
             // pathname = domain & search = quary string
+            if (category) {
+              setCategory(null)
+            }
             return 'عملیات با موفقیت انجام شد'
           }
         },
         error: {
-          render({data}) {
-            if (data.response.data.status === 400) {
+          render({ data }) {
+            if (data.response.status === 400) {
               return t('categoryList.' + data.response.data.code)
             } else {
               return "خطا در اجرای عملیات"
@@ -56,16 +75,16 @@ const AddOrUpdateCategory = ({ setShowAddCategory }) => {
           </div>
           <div className="text-start mt-3">
             <button
-             type="button"
-             className="btn btn-lg btn-secondary ms-2"
-             onClick={() => { setShowAddCategory(false)}}>
+              type="button"
+              className="btn btn-lg btn-secondary ms-2"
+              onClick={onClose}>
               بستن
-             </button>
+            </button>
             <button
-             type="submit"
-             className="btn btn-lg btn-primary ms-2">
+              type="submit"
+              className="btn btn-lg btn-primary ms-2">
               ثبت تغییرات
-             </button>
+            </button>
           </div>
         </form>
       </div>

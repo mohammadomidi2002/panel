@@ -6,11 +6,14 @@ import Modal from "../components/modal";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import AddOrUpdateCategory from "../features/categories/components/add-or-update-category";
+import { useCategoryContext } from "../features/categories/category-context";
 
 const CourseCategories = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
   const [showAddCategory, setShowAddCategory] = useState(false);
+
+  const {category} = useCategoryContext();
 
   const data = useLoaderData();
   const navigate = useNavigate();
@@ -64,7 +67,7 @@ const CourseCategories = () => {
               افزودن دسته جدید
             </a>
           </div>
-          {showAddCategory && <AddOrUpdateCategory setShowAddCategory={setShowAddCategory}/>}
+          {(showAddCategory || category) && <AddOrUpdateCategory setShowAddCategory={setShowAddCategory}/>}
           <Suspense fallback={<p className="text-info">در حال دریافت اطلاعات...</p>}>
             <Await resolve={data.categories}>
               {

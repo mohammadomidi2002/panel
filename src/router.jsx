@@ -5,20 +5,25 @@ import Register, { registerAction } from "./features/identity/components/registe
 import MainLayout from "./layouts/mainLayout/main-layout";
 import Courses, { coursesLoder } from "./pages/courses";
 import CourseCategories, { categoriesLoader } from "./pages/course-categories";
+import { CategoryProvider } from "./features/categories/category-context";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout/>,
+    element: <MainLayout />,
     children: [
       {
-        element: <Courses/>,
+        element: <Courses />,
         index: true,
         loader: coursesLoder
       },
       {
         path: 'course-categories',
-        element: <CourseCategories/>,
+        element: (
+          <CategoryProvider>
+            <CourseCategories />
+          </CategoryProvider>
+        ),
         loader: categoriesLoader
       }
     ]
